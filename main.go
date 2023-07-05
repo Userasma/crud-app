@@ -20,6 +20,7 @@ func main() {
 	//this work as a dynamic router
 	r.GET("/posts/:id", controllers.PostsShow)
 	r.DELETE("/posts/:id", controllers.PostDelete)
+	//commit one
 
 	r.Run()
 }

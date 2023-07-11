@@ -15,7 +15,7 @@ func PostCreate(c *gin.Context) {
 	}
 	c.Bind(&body)
 	//creat a post
-	post := models.Post{Title: body.Title, Body: body.Body}
+	post := models.Post{FirstName: body.Title, LastName: body.Body}
 	result := initializers.DB.Create(&post)
 
 	if result.Error != nil {
@@ -64,8 +64,8 @@ func PostsUpdate(c *gin.Context) {
 
 	//Get the data off request body
 	var body struct {
-		Body  string
-		Title string
+		FirstName string
+		LastName  string
 	}
 	c.Bind(&body)
 
@@ -76,7 +76,7 @@ func PostsUpdate(c *gin.Context) {
 
 	//Updated it
 
-	initializers.DB.Model(&post).Updates(models.Post{Title: body.Title, Body: body.Body})
+	initializers.DB.Model(&post).Updates(models.Post{FirstName: body.FirstName, LastName: body.LastName})
 
 	//Respon with it
 

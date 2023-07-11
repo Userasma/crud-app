@@ -8,7 +8,7 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
-	initializers.ConnectToDB()
+	initializers.ConnectToDB() //to esatblish the connection 
 
 }
 

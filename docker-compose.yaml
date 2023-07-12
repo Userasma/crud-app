@@ -10,7 +10,7 @@ services:
   db:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=18f18010 
       - POSTGRES_DB=booking_BD 
 
@@ -22,8 +22,7 @@ services:
   - 3000:3000
   environment:
     - DATABASE_USER= postgres
-    - DATABASE_NAME= booking_BD
-    - DATABASE_PASSWORD=SE7Tl6r6KeLxpDjGHgxbDwYRGnXmpRZo
+    - DATABASE_PASSWORD=18f18010
     - DATABASE_HOST= localhost
     - DATABASE_PORT=5432
   

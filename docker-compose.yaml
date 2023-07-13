@@ -1,14 +1,16 @@
 version: "3"
 services:
  postgres: 
-  image: postgres:latest
+  image: postgres:12-alpine
   #to spacifiy some enviroment keyworld 
   environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=18f18010 
       - POSTGRES_DB=booking_BD 
-#This all the API servers for go-crud 
-    api: 
+      #This all the API servers for go-crud 
+    
+api:
+
 #Should build all the images from 
      build:
 #Specifiy the context to specify the image, the dot means the current postgres folder    

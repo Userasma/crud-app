@@ -7,7 +7,7 @@ type Post struct {
 	id        int
 	FirstName string
 	LastName  string
-	//Email string
+	Email     string
 }
 
 // type member struct {

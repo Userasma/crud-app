@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:12-alpine 
+    environment:
+      - POSTGRES_PASSWORD=18f18010
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=18f18010
+      - DATABASE_NAME=postgres
+
+  api: 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment: 
+      - DB_URL=postgresql://postgres:18f18010@postgres:5432/postgres?sslmode=disable
+    #depends-on instraction to tell docker-compose that the api service depend on postgres services 
+    #This only makes sure that the postgres will start before the api service 
+    #And it dose'n ensure that the postgres are ready state before start api service.
+    depends_on: 
+      - postgres 
+    #To override the default entry point and commande
+    #To it will wait for postgres servcies to be ready before start the ipa service     
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    #This command istraction means that when the entry point is overridden, it will clear out any defulate command on the image
+    #meaning that the CMD instraction in dockerfile will be ignored
+    #In this case, need to explicitly spacify the commande that want to run it in this docker-compose.yml 
+    command: ["/app/main"]    

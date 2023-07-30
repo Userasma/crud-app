@@ -1,12 +1,16 @@
 version: "3.8"
 services:
+#The postgres service use the official PostgresSQL images and sets the necessary environment variables for database.   
   postgres:
     image: postgres:12-alpine 
     environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=18f18010
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=18f18010
-      - DATABASE_NAME=postgres
+      
+
+    ports:
+      - "5432:5432"
 
   api: 
     build: 
@@ -23,7 +27,8 @@ services:
       - postgres 
     #To override the default entry point and commande
     #To it will wait for postgres servcies to be ready before start the ipa service     
-    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    #entrypoint: ["/app/wait-for.sh", "postgres:5432", "--","/app/start.sh"]
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--","/app/start.sh"]
     #This command istraction means that when the entry point is overridden, it will clear out any defulate command on the image
     #meaning that the CMD instraction in dockerfile will be ignored
     #In this case, need to explicitly spacify the commande that want to run it in this docker-compose.yml 
